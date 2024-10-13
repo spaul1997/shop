@@ -53,7 +53,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="2">Total</td>
-                        <td>₹ {{Cart::total()}} /- <a class="btn btn-sm btn-success" href="{{route('payment')}}">Pay Now</a></td>
+                        <td>₹ {{Cart::total()}} /- @if(Cart::total() > 0)<a class="btn btn-sm btn-success" href="{{route('payment')}}">Pay Now</a>@endif</td>
                     </tr>
                 </tfoot>
             </table>

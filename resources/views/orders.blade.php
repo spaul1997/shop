@@ -20,6 +20,7 @@
     </div>
 
     <div class="container">
+        @if (session('user')['id'] == 1)
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-value">{{$total['products']}}</div>
@@ -34,35 +35,34 @@
                 <div class="stat-label">Total Users</div>
             </div>
         </div>
+        @endif
         <div class="dashboard">
             <div class="panel">
                 <div class="d-flex justify-content-between">
-                    <h4 class="text-left">Latest Products</h4>
-                    <a href="{{route('add-product')}}" class="btn btn-sm btn-success text-right">Add Product</a>
+                    <h4 class="text-left">Latest Orders</h4>
                 </div>
                 <table id="product-list">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th colspan="2">Product</th>
-                            <th>Description</th>
+                            <th>Orders ID</th>
+                            <th>User Info</th>
                             <th>Quantity</th>
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $item)
+                        @foreach ($orders as $item)
                         <tr>
-                            <td>{{$item->pid}}</td>
-                            <td><img width="50px" height="80px" src="{{asset('assets/website/products').'/'.$item->image}}" alt="{{$item->pid}}"></td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->description}}</td>
-                            <td>{{$item->quantity}}</td>
-                            <td>{{$item->price}}</td>
+                            <td>{{$item->oid}}</td>
                             <td>
-                                <a href="{{route('edit-product', $item->pid)}}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                <a href="{{route('delete-product', $item->pid)}}" onclick="return confirm('Are you Sure?')" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                                <span>Name : {{$item->name}}</span><br>
+                                <span>Email : {{$item->email}}</span><br>
+                            </td>
+                            <td>{{$item->quantity}}</td>
+                            <td>{{$item->total}} /-</td>
+                            <td>
+                                <a href="{{route('orders-details', $item->oid)}}" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

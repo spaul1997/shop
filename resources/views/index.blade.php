@@ -57,8 +57,12 @@
     <script>
         function add_to_cart(pid){
             $.ajax({
-                type: "GET",
-                url: "{{route('add-to-cart')}}/".pid,
+                type: "POST",
+                url: "{{route('add-to-cart')}}",
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    'pid': pid
+                },
                 success: function(result){
                     if(result){
                         toastr.success("Added to Cart");

@@ -13,10 +13,9 @@
 
 <body>
     <div class="mode-switcher">
-        @isok("product")<button><i class="fas fa-layer-group"></i> Products</button>@endisok
-        @isok("order")<button><i class="fas fa-folder-open"></i> Orders</button>@endisok
-        @isok("role-and-permission")<button><i class="fas fa-user-lock"></i> Role & Permission</button>@endisok
-        @isok("user-order")<button><i class="fas fa-folder-open"></i> My Orders</button>@endisok
+        @isok("product")<a href="{{route('dashboard')}}"><button><i class="fas fa-layer-group"></i> Products</button></a>@endisok
+        @isok("order")<a href="{{route('orders')}}"><button><i class="fas fa-folder-open"></i> Orders</button></a>@endisok
+        @isok("user-order")<a href="{{route('my-orders')}}"><button><i class="fas fa-folder-open"></i> My Orders</button></a>@endisok
         <a href="{{route('logout')}}"><button><i class="fa-solid fa-right-from-bracket"></i> Logout</button></a>
     </div>
 

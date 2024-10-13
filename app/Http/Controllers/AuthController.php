@@ -50,7 +50,11 @@ class AuthController extends Controller
             $request->session()->put('jwt',$token);
             $request->session()->put('user',$user);
             toastr()->success('Successfully logged In', 'Congrats');
-            return redirect()->Route('dashboard');
+            if(JWTAuth::user()->id == 1){
+                return redirect()->Route('dashboard');
+            }else{
+                return redirect()->Route('my-orders');
+            }
         }else{
             toastr()->error('Login credentials are invalid.');
             return redirect()->back();

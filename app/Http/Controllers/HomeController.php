@@ -54,7 +54,7 @@ class HomeController extends Controller
         $order->user_id = $user_id;
         $order->oid = 'OD'.rand(10000,99999);
         $order->total = Cart::total();
-        $order->quantity = Cart::total();
+        $order->quantity = Cart::count();
         if($order->save()){
             $address = new OrderAddress();
             $address->order_id = $order->id;
@@ -97,8 +97,8 @@ class HomeController extends Controller
 
 
     }
-    public function add_to_cart($pid = 0){
-        // dd(Cart::content());
+    public function add_to_cart(Request $request){
+        $pid = $request->input('pid');
         $product = Product::where('pid',$pid)->first();
         $check = Cart::content()->firstWhere('id', $pid);
         if($check){
