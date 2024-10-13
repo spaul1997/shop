@@ -89,7 +89,7 @@ class HomeController extends Controller
             }
             Cart::destroy();
             toastr()->success('Successfully Placed Order', 'Congrats');
-            return redirect()->Route('home');
+            return redirect()->Route('thank-you');
         }else{
             toastr()->error('Failed! try again.');
             return redirect()->back();
@@ -126,5 +126,9 @@ class HomeController extends Controller
             toastr()->error('Failed! Try again');
         }
         return redirect()->back();
+    }
+    public function thank_you(){
+        $title = 'Payment Success';
+        return view('thank-you')->with(compact('title'));
     }
 }

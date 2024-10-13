@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Register</title>
     <link rel="stylesheet" href="{{ asset('assets/website/css/login.css') }}">
 </head>
 <body>
     <div class="box">
-        <form action="{{route('check-users')}}" method="POST">
+        <form action="{{route('add-user')}}" method="POST">
             @csrf
             <div class="input-box">
-                <h2>Sign In</h2>
+                <h2>Sign Up</h2>
+                <input type="text" name="name" required>
+                <span>Name</span>
+                <i></i>
+            </div>
+            <div class="input-box">
                 <input type="email" name="email" required>
                 <span>Email</span>
                 <i></i>
@@ -21,9 +26,9 @@
                 <span>Password</span>
                 <i></i>
             </div>
-            <input type="submit" value="Login">
+            <input type="submit" value="Register">
             <div class="links">
-                <a href="{{route('register')}}">Sign Up</a>
+                <a href="{{route('login')}}">Login</a>
             </div>
         </form>
     </div>

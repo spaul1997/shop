@@ -29,6 +29,8 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index')->name('login');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/add-user', 'add_user')->name('add-user');
     Route::post('/check-users', 'check_users')->name('check-users');
     Route::get('/logout', 'logout')->name('logout');
 });

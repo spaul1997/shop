@@ -21,6 +21,14 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function register()
+    {
+        if (session('jwt')){
+            return redirect()->route('dashboard');
+        }
+        return view('signup');
+    }
+
     public function check_users(Request $request)
     {
         $validated = $request->validate([
@@ -59,6 +67,27 @@ class AuthController extends Controller
             toastr()->error('Login credentials are invalid.');
             return redirect()->back();
         }
+    }
+
+    public function add_user(Request $request){
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|string|min:6|max:50',
+        ]);
+        $check = User::where('email',$request->input('email'))->first();
+        if($check){
+            toastr()->error('Already register this email.');
+        }else{
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+            $user->role_id = 2;
+            $user->save();
+            toastr()->success('Successfully Register your account', 'Congrats');
+        }
+        return redirect()->Route('login');
     }
 
     public function logout(Request $request)
